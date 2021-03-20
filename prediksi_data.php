@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>hallo dunia</h1>
+    <h1>Prediksi Corona Menggunakan Regresi Linier</h1>
     <script type="text/javascript" src="script.js"></script>
 </body>
 
