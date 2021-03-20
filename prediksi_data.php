@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>hallo dunia</h1>
+    <h1>Prediksi Data Corona</h1>
     <script type="text/javascript" src="script.js"></script>
 </body>
 
