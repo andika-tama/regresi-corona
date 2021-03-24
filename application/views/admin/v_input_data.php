@@ -9,15 +9,16 @@
 </head>
 
 <body>
+    <?php echo $this->session->flashdata('pesan') ?>
     <?php foreach ($corona as $cr) {
         $hari = $cr->hari_ke;
     } ?>
-    <form action="method=" post" action="<?php echo base_url('admin/input_data') ?>">
+    <form method="POST" action="<?php echo base_url('admin/input_data') ?>">
         <div class="item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Hari Ke-
             </label>
             <div class="col-md-6 col-sm-6 ">
-                <input type="number" id="first-name" name="tgl" class="form-control" required="required" value="<?php echo $hari + 1; ?>" disabled>
+                <input type="number" id="first-name" name="hari" class="form-control" value="<?php echo $hari + 1; ?>">
             </div>
         </div>
         <div class="item form-group">
