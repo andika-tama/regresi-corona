@@ -11,7 +11,9 @@
 <body>
     <?php echo $this->session->flashdata('pesan') ?>
     <?php foreach ($corona as $cr) {
-        $hari = $cr->hari_ke;
+        $hari       = $cr->hari_ke;
+        $tanggal    = $cr->tgl;
+        $tgl_fix    = date('d-m-Y', strtotime('+1 days', strtotime($tanggal)));
     } ?>
     <form method="POST" action="<?php echo base_url('admin/input_data') ?>">
         <div class="item form-group">
@@ -25,7 +27,7 @@
             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tanggal
             </label>
             <div class="col-md-6 col-sm-6 ">
-                <input type="date" id="first-name" name="tgl" class="form-control" required="required">
+                <input type="text" id="first-name" name="tgl" class="form-control" required="required" value="<?php echo $tgl_fix; ?>">
             </div>
         </div>
         <div class="item form-group">
