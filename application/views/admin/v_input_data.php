@@ -9,8 +9,17 @@
 </head>
 
 <body>
-    <?php echo $corona ?>
+    <?php foreach ($corona as $cr) {
+        $hari = $cr->hari_ke;
+    } ?>
     <form action="method=" post" action="<?php echo base_url('admin/input_data') ?>">
+        <div class="item form-group">
+            <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Hari Ke-
+            </label>
+            <div class="col-md-6 col-sm-6 ">
+                <input type="number" id="first-name" name="tgl" class="form-control" required="required" value="<?php echo $hari + 1; ?>" disabled>
+            </div>
+        </div>
         <div class="item form-group">
             <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Tanggal
             </label>
@@ -25,7 +34,7 @@
                 <input type="number" id="first-name" name="jml_pstf" class="form-control" required="required">
             </div>
         </div>
-        <?php echo $data_corona ?>
+        <button type="submit" class="btn btn-emas">Tambah</button>
     </form>
 </body>
 
