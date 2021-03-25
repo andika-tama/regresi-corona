@@ -7,6 +7,29 @@ class Admin extends CI_Controller
         $this->load->view('admin/v_input_data', $data);
     }
 
+    public function lihat_hitung()
+    {
+        $jml_data   = 0;
+        $sgm_x      = 0;
+        $sgm_y      = 0;
+        $sgm_xy     = 0;
+        $sgm_x2     = 0;
+        $data_mentah = $this->m_corona->ambil_data_mentah('data_corona')->result();
+
+        //hitung sigma dari x, y, xy, x2
+        foreach ($data_mentah as $dm) {
+            $sgm_x += $dm->hari_ke;
+            $sgm_y += $dm->jml_pstf;
+            $sgm_xy += $dm->xy;
+            $sgm_x2 += $dm->x2;
+        }
+        $data['sgm_x'] = $sgm_x;
+        $data['sgm_y'] = $sgm_y;
+        $data['sgm_xy'] = $sgm_xy;
+        $data['sgm_x2'] = $sgm_x2;
+        $this->load->view('admin/v_hitung_data', $data);
+    }
+
     public function input_data()
     {
         $this->_rules();
