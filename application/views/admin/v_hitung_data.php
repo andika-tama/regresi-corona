@@ -18,6 +18,17 @@
     echo "<br>";
     echo $sgm_x2;
     echo "<br>";
+    echo $jml_data;
+    echo "<br>";
+    echo $big_X;
+    echo "<br>";
+    echo $big_Y;
+    echo "<br>";
+    echo $small_b;
+    echo "<br>";
+    echo $small_a;
+    echo "<br>";
+    echo $test10;
     ?>
 </body>
 

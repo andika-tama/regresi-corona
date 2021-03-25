@@ -22,11 +22,28 @@ class Admin extends CI_Controller
             $sgm_y += $dm->jml_pstf;
             $sgm_xy += $dm->xy;
             $sgm_x2 += $dm->x2;
+            $jml_data++;
         }
+
+        $big_X  = $sgm_x / $jml_data;
+        $big_Y  = $sgm_y / $jml_data;
+        $big_X2 = $big_X * $big_X;
+
+        $small_b = ($sgm_xy - $jml_data * $big_X * $big_Y) / ($sgm_x2 - $jml_data * $big_X2);
+        $small_a = $big_Y - $small_b * $big_X;
+
+        $x255 = $small_a + $small_b * 255;
+
         $data['sgm_x'] = $sgm_x;
         $data['sgm_y'] = $sgm_y;
         $data['sgm_xy'] = $sgm_xy;
         $data['sgm_x2'] = $sgm_x2;
+        $data['jml_data'] = $jml_data;
+        $data['big_X'] = $big_X;
+        $data['big_Y'] = $big_Y;
+        $data['small_b'] = $small_b;
+        $data['small_a'] = $small_a;
+        $data['test10'] = $x255;
         $this->load->view('admin/v_hitung_data', $data);
     }
 
