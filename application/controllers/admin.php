@@ -28,7 +28,7 @@ class Admin extends CI_Controller
         $i = 0;
         foreach ($data_mentah as $dmt) {
             $hari_ke[$i] = $dmt->hari_ke;
-            $jml_pstf[$i++] = $dm->jml_pstf;
+            $jml_pstf[$i++] = $dmt->jml_pstf;
         }
 
         $big_X  = $sgm_x / $jml_data;
