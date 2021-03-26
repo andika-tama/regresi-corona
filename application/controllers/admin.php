@@ -44,6 +44,17 @@ class Admin extends CI_Controller
         $data['small_b'] = $small_b;
         $data['small_a'] = $small_a;
         $data['test10'] = $x255;
+
+        //untuk input model X Y a dan b
+        // $data_model = array(
+        //     'big_x'   => $big_X,
+        //     'big_y'       => $big_Y,
+        //     'small_a'  => $small_a,
+        //     'small_b'        => $small_b,
+        // );
+
+        //$this->m_corona->input_data_model($data_model);
+
         $this->load->view('admin/v_hitung_data', $data);
     }
 

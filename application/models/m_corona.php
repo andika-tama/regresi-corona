@@ -16,4 +16,8 @@ class M_corona extends CI_Model
     {
         $this->db->insert('data_corona', $data);
     }
+    public function input_data_model($data)
+    {
+        $this->db->insert('model_regresi', $data);
+    }
 }
