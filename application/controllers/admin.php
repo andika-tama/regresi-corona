@@ -27,7 +27,8 @@ class Admin extends CI_Controller
 
         $i = 0;
         foreach ($data_mentah as $dmt) {
-            $hari_ke[$i++] = $dmt->hari_ke;
+            $hari_ke[$i] = $dmt->hari_ke;
+            $jml_pstf[$i++] = $dm->jml_pstf;
         }
 
         $big_X  = $sgm_x / $jml_data;
@@ -54,6 +55,8 @@ class Admin extends CI_Controller
         $data['small_b'] = $small_b;
         $data['small_a'] = $small_a;
         $data['forcast'] = $data_forcast;
+        $data['data_real'] = $jml_pstf;
+        $data['hari'] = $hari_ke;
 
         //untuk input model X Y a dan b
         // $data_model = array(
