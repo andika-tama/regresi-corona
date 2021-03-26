@@ -25,6 +25,11 @@ class Admin extends CI_Controller
             $jml_data++;
         }
 
+        $i = 0;
+        foreach ($data_mentah as $dmt) {
+            $hari_ke[$i++] = $dmt->hari_ke;
+        }
+
         $big_X  = $sgm_x / $jml_data;
         $big_Y  = $sgm_y / $jml_data;
         $big_X2 = $big_X * $big_X;
@@ -32,7 +37,12 @@ class Admin extends CI_Controller
         $small_b = ($sgm_xy - $jml_data * $big_X * $big_Y) / ($sgm_x2 - $jml_data * $big_X2);
         $small_a = $big_Y - $small_b * $big_X;
 
-        $x255 = $small_a + $small_b * 255;
+        //$x255 = $small_a + $small_b * 255;
+
+        //hitung prediksi
+        for ($i = 0; $i < $jml_data; $i++) {
+            $data_forcast[$i] =  $small_a + $small_b * $hari_ke[$i];
+        }
 
         $data['sgm_x'] = $sgm_x;
         $data['sgm_y'] = $sgm_y;
@@ -43,7 +53,7 @@ class Admin extends CI_Controller
         $data['big_Y'] = $big_Y;
         $data['small_b'] = $small_b;
         $data['small_a'] = $small_a;
-        $data['test10'] = $x255;
+        $data['forcast'] = $data_forcast;
 
         //untuk input model X Y a dan b
         // $data_model = array(
