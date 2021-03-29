@@ -75,7 +75,11 @@ class Admin extends CI_Controller
 
         //$this->m_corona->input_data_model($data_model);
 
-        $this->load->view('admin/v_hitung_data', $data);
+        //$this->load->view('admin/v_hitung_data', $data);
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/cek_regresi.php', $data);
+        $this->load->view('templet_admin/footer.php');
     }
 
     public function input_data()
