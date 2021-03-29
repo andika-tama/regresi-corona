@@ -1,6 +1,13 @@
 <?php
 class Admin extends CI_Controller
 {
+    public function dashboard()
+    {
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/dashboard.php');
+        $this->load->view('templet_admin/footer.php');
+    }
     public function input_data_corona()
     {
         $data['corona'] = $this->m_corona->ambil_data('data_corona')->result();
