@@ -33,6 +33,7 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
+            <!-- side bar untuk kelola data -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-viruses"></i>
@@ -41,8 +42,22 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Positif COVID-19 (ID):</h6>
-                        <a class="collapse-item" href="buttons.html">Lihat Data</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/input_data') ?>">Input Data</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/data_real') ?>">Data Korban Positif</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/input_data') ?>">Input Data Korban Positif</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRegresi" aria-expanded="true" aria-controls="collapseRegresi">
+                    <i class="fas fa-fw fa-chart-line"></i>
+                    <span>Data Prediksi</span>
+                </a>
+                <div id="collapseRegresi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Data Prediksi COVID-19 (ID):</h6>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_hitung') ?>">Prediksi Regresi Linier</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/input_data') ?>"> Variabel Regresi Linier</a>
                     </div>
                 </div>
             </li>

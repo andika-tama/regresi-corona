@@ -8,10 +8,23 @@ class Admin extends CI_Controller
         $this->load->view('admin/dashboard.php');
         $this->load->view('templet_admin/footer.php');
     }
+
+    public function data_real()
+    {
+        $data['corona'] = $this->m_corona->ambil_data_real('data_corona')->result();
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/v_data_real.php', $data);
+        $this->load->view('templet_admin/footer.php');
+    }
     public function input_data_corona()
     {
         $data['corona'] = $this->m_corona->ambil_data('data_corona')->result();
-        $this->load->view('admin/v_input_data', $data);
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/v_input_data_real.php', $data);
+        $this->load->view('templet_admin/footer.php');
+        //$this->load->view('admin/v_input_data', $data);
     }
 
     public function lihat_hitung()

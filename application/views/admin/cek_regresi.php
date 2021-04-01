@@ -8,8 +8,12 @@
                <div class="container-fluid">
 
                    <!-- Page Heading -->
-                   <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                   <h1 class="h3 mb-4 text-gray-800 mt-3">Prediksi COVID-19</h1>
+                   <hr class="sidebar-divider">
 
+                   <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Data Prediksi / <b>Prediksi Regresi Linier</b></div>
+
+                   <hr class="sidebar-divider">
                    <div class="card shadow mb-4">
                        <div class="card-header py-3">
                            <h6 class="m-0 font-weight-bold text-primary text-center">Forcasting Regresi Linier</h6>
@@ -31,7 +35,6 @@
                                 $asli[$i++] = $dr;
                             }
                             ?>
-
                            <table class="table table-striped table-bordered">
                                <thead>
                                    <tr>
@@ -42,7 +45,6 @@
                                </thead>
                                <tbody>
                                    <?php for ($i = 0; $i < $jml_data; $i++) : ?>
-
                                        <tr>
                                            <td><?php echo $hari_pandemi[$i]; ?></td>
                                            <td><?php echo $asli[$i]; ?></td>
@@ -53,11 +55,7 @@
                            </table>
                        </div>
                    </div>
-
-
-
                </div>
                <!-- /.container-fluid -->
-
            </div>
            <!-- End of Main Content -->
