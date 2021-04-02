@@ -8,7 +8,7 @@
                <div class="container-fluid">
 
                    <!-- Page Heading -->
-                   <h1 class="h3 mb-4 text-gray-800 mt-3">Dara Korban Positif COVID-19</h1>
+                   <h1 class="h3 mb-4 text-gray-800 mt-3">Data Korban Positif COVID-19</h1>
                    <hr class="sidebar-divider">
 
                    <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Data Real / <b>Data Korban Positif</b></div>

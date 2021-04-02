@@ -12,6 +12,12 @@ class M_corona extends CI_Model
         return $this->db->select('*')->from($tb)->get();
     }
 
+    public function ambil_data_variabel($tb)
+    {
+        return $this->db->select('*')->from($tb)->get();
+    }
+
+
     public function ambil_data_mentah($tb)
     {
         return $this->db->select('*')->from($tb)->get();

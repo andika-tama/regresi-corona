@@ -8,15 +8,15 @@
                <div class="container-fluid">
 
                    <!-- Page Heading -->
-                   <h1 class="h3 mb-4 text-gray-800 mt-3">Dara Korban Positif COVID-19</h1>
+                   <h1 class="h3 mb-4 text-gray-800 mt-3">Input Data Korban Positif COVID-19</h1>
                    <hr class="sidebar-divider">
 
-                   <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Data Real / <b>Data Korban Positif</b></div>
+                   <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Data Real / <b>Input Data Korban Positif</b></div>
 
                    <hr class="sidebar-divider">
                    <div class="card shadow mb-4">
                        <div class="card-header py-3">
-                           <h6 class="m-0 font-weight-bold text-primary text-center">Data Real Korban Positif</h6>
+                           <h6 class="m-0 font-weight-bold text-primary text-center">Form Korban Positif</h6>
                        </div>
                        <div class="card-body">
                            <?php //echo $this->session->flashdata('pesan') 

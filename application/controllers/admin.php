@@ -27,6 +27,15 @@ class Admin extends CI_Controller
         //$this->load->view('admin/v_input_data', $data);
     }
 
+    public function lihat_variabel()
+    {
+        $data['regresi'] = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/v_data_variabel.php', $data);
+        $this->load->view('templet_admin/footer.php');
+    }
+
     public function lihat_hitung()
     {
         $jml_data   = 0;
@@ -64,6 +73,7 @@ class Admin extends CI_Controller
         for ($i = 0; $i < $jml_data; $i++) {
             $data_forcast[$i] =  $small_a + $small_b * $hari_ke[$i];
         }
+
 
         $data['sgm_x'] = $sgm_x;
         $data['sgm_y'] = $sgm_y;
