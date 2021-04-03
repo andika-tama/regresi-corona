@@ -9,6 +9,7 @@
 
                    <!-- Page Heading -->
                    <h1 class="h3 mb-4 text-gray-800 mt-3">Data Variabel Regresi Linier (Model)</h1>
+                   <?php echo $this->session->flashdata('pesan') ?>
                    <hr class="sidebar-divider">
 
                    <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Data Prediksi / <b>Data Variabel</b></div>
@@ -48,6 +49,7 @@
                                    </tr>
                                <?php endforeach; ?>
                                </table>
+                               <?php echo anchor('admin/update_variabel', '<button class="btn btn-sm btn-primary mb-3 btn-block"><i class="fas fa-tools"></i> Update Data Variabel</button>') ?>
                        </div>
                    </div>
                </div>

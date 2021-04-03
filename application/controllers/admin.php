@@ -36,6 +36,69 @@ class Admin extends CI_Controller
         $this->load->view('templet_admin/footer.php');
     }
 
+    public function update_variabel()
+    {
+        $jml_data   = 0;
+        $sgm_x      = 0;
+        $sgm_y      = 0;
+        $sgm_xy     = 0;
+        $sgm_x2     = 0;
+        $data_mentah = $this->m_corona->ambil_data_mentah('data_corona')->result();
+
+        //hitung sigma dari x, y, xy, x2
+        foreach ($data_mentah as $dm) {
+            $sgm_x += $dm->hari_ke;
+            $sgm_y += $dm->jml_pstf;
+            $sgm_xy += $dm->xy;
+            $sgm_x2 += $dm->x2;
+            $jml_data++;
+        }
+
+        $i = 0;
+        foreach ($data_mentah as $dmt) {
+            $hari_ke[$i] = $dmt->hari_ke;
+            $jml_pstf[$i++] = $dmt->jml_pstf;
+        }
+
+        $big_X  = $sgm_x / $jml_data;
+        $big_Y  = $sgm_y / $jml_data;
+        $big_X2 = $big_X * $big_X;
+
+        $small_b = ($sgm_xy - $jml_data * $big_X * $big_Y) / ($sgm_x2 - $jml_data * $big_X2);
+        $small_a = $big_Y - $small_b * $big_X;
+
+        $varibel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+        foreach ($varibel as $vr) {
+            $id_var = $vr->id;
+        }
+
+        $where = array(
+            'id' => $id_var,
+        );
+        $data_model = array(
+            'id' => $id_var,
+            'big_x'   => $big_X,
+            'big_y'       => $big_Y,
+            'small_a'  => $small_a,
+            'small_b'        => $small_b,
+            'jml_data'  => $jml_data,
+        );
+
+        $this->m_corona->update_data_variabel($where, $data_model);
+
+        $this->session->set_flashdata('pesan', '<div 
+            	class="alert alert-success alert-dismissible fade show" role="alert">
+            		Berhasil Update Data Variabel Regresi
+            		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            			<span aria-hidden="true">&times;
+            			</span>
+            		</button>
+            	</div>'); //flash data untuk alret!
+
+        redirect('admin/lihat_variabel');
+    }
+
+    //lihat prediksi
     public function lihat_hitung()
     {
         $jml_data   = 0;

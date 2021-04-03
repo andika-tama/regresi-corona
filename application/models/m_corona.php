@@ -31,4 +31,9 @@ class M_corona extends CI_Model
     {
         $this->db->insert('model_regresi', $data);
     }
+    public function update_data_variabel($where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update('model_regresi', $data);
+    }
 }
