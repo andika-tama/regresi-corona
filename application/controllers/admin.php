@@ -1,6 +1,18 @@
 <?php
 class Admin extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_is_logged();
+    }
+    public function index()
+    {
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/dashboard.php');
+        $this->load->view('templet_admin/footer.php');
+    }
     public function dashboard()
     {
         $this->load->view('templet_admin/header.php');
@@ -278,5 +290,12 @@ class Admin extends CI_Controller
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_lihat_MAD.php', $data);
         $this->load->view('templet_admin/footer.php');
+    }
+
+    private function _is_logged()
+    {
+        if (!$this->session->userdata('username')) {
+            redirect('auth/login');
+        }
     }
 }
