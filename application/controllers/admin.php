@@ -209,4 +209,74 @@ class Admin extends CI_Controller
         $this->form_validation->set_rules('tgl', 'tgl', 'required', ['required' => 'Tanggal Wajib Diisi!']);
         $this->form_validation->set_rules('jml_pstf', 'jml_pstf', 'required', ['required' => 'Jumlah Positif Wajib Diisi!']);
     }
+
+    //lihat selisih
+    public function lihat_selisih()
+    {
+        $i = 0;
+        $data_real = $this->m_corona->ambil_data_real('data_corona')->result();
+        $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+
+        foreach ($data_real as $dr) {
+            $data_pstf[$i] = $dr->jml_pstf;
+            $data_hari[$i++] = $dr->hari_ke; //x
+        }
+        foreach ($data_variabel as $dv) {
+            $a = $dv->small_a;
+            $b = $dv->small_b;
+            $jml_data = $dv->jml_data;
+        }
+
+        for ($k = 0; $k < $jml_data; $k++) {
+            $data_forcast[$k] =  $a + $b * $data_hari[$k];
+            $pembulatan[$k] = round($data_forcast[$k], 0);
+            $selisih[$k] = abs($data_pstf[$k] -  $pembulatan[$k]);
+        }
+
+        $data['real'] = $data_real;
+        $data['forcast'] = $data_forcast;
+        $data['pembulatan'] = $pembulatan;
+        $data['selisih'] = $selisih;
+
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/v_lihat_selisih.php', $data);
+        $this->load->view('templet_admin/footer.php');
+    }
+
+    public function lihat_MAD()
+    {
+        $i = 0;
+        $sgm_xifi = 0;
+        $data_real = $this->m_corona->ambil_data_real('data_corona')->result();
+        $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+
+        foreach ($data_real as $dr) {
+            $data_pstf[$i] = $dr->jml_pstf;
+            $data_hari[$i++] = $dr->hari_ke; //x
+        }
+        foreach ($data_variabel as $dv) {
+            $a = $dv->small_a;
+            $b = $dv->small_b;
+            $jml_data = $dv->jml_data;
+        }
+        for ($k = 0; $k < $jml_data; $k++) {
+            $data_forcast[$k] =  $a + $b * $data_hari[$k];
+
+            $xifi[$k] = abs($data_pstf[$k] - $data_forcast[$k]);
+            $sgm_xifi += $xifi[$k];
+        }
+        $MAD = $sgm_xifi / $jml_data;
+
+        $data['real'] = $data_real;
+        $data['forcast'] = $data_forcast;
+        $data['xifi'] = $xifi;
+        $data['sgm_xifi'] = $sgm_xifi;
+        $data['MAD'] = $MAD;
+
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/v_lihat_MAD.php', $data);
+        $this->load->view('templet_admin/footer.php');
+    }
 }

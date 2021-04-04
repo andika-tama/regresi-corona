@@ -71,8 +71,8 @@
                 <div id="collapseAkurasi" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Akurasi Regresi Linier:</h6>
-                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_hitung') ?>">Selisih</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_variabel') ?>"> Akurasi MAPE</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_selisih') ?>">Selisih</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_MAD') ?>"> Akurasi MAD</a>
                     </div>
                 </div>
             </li>
