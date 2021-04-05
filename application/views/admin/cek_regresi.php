@@ -30,6 +30,19 @@ foreach ($data_real as $dr) {
 
             <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Data Prediksi / <b>Prediksi Regresi Linier</b></div>
 
+            <hr>
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary text-center">Grafik Regresi Linier</h6>
+                </div>
+                <div class="card-body">
+                    <div class="text-center">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
             <hr class="sidebar-divider">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -60,3 +73,46 @@ foreach ($data_real as $dr) {
         <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->
+
+    <script>
+        var ctx = document.getElementById('myChart'); //ctx berarti kita mengarah pada labek MyChart jadi selanjutnya hanya perlu pakai var ctx untuk ke label myChart
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [<?php for ($i = 0; $i < $jml_data; $i++) {
+                                echo "' Hari Ke-" . $hari_pandemi[$i] . "' ,";
+                            } ?>], //label untuk X
+                datasets: [{
+                        label: 'Regresi Linier (prediksi)', //keterangan di atas grafik
+                        data: [<?php for ($i = 0; $i < $jml_data; $i++) {
+                                    echo "'" . $prediksi[$i] . "' ,";
+                                } ?>], //data grafiknya
+                        backgroundColor: [ //warna untuk grafiknya jumlahnya harus sama banyaknya untuk tiap2 label dan data
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderColor: [ //warna untuk border grafiknya
+                            'rgba(255, 99, 132, 1)'
+                        ],
+                        borderWidth: 1
+                    },
+                    {
+                        type: 'scatter',
+                        label: 'Korban Positif (Real)',
+                        data: [<?php for ($i = 0; $i < $jml_data; $i++) {
+                                    echo "'" . $asli[$i] . "' ,";
+                                } ?>],
+                        backgroundColor: [ //warna untuk grafiknya jumlahnya harus sama banyaknya untuk tiap2 label dan data
+                            'rgba(0, 255, 132, 0.2)'
+                        ],
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true //garis Y (ke atas) mulai dari 0
+                    }
+                }
+            }
+        });
+    </script>
