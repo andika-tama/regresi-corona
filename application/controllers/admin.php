@@ -111,8 +111,11 @@ class Admin extends CI_Controller
     }
 
     //lihat prediksi
-    public function lihat_hitung()
+    public function lihat_hitung($data_ambil = NULL)
     {
+        if ($data_ambil == NULL) {
+            $data_ambil = 5;
+        }
         $jml_data   = 0;
         $sgm_x      = 0;
         $sgm_y      = 0;
@@ -149,6 +152,12 @@ class Admin extends CI_Controller
             $data_forcast[$i] =  $small_a + $small_b * $hari_ke[$i];
         }
 
+        $j = 0;
+        for ($i = $jml_data; $i < $jml_data + $data_ambil; $i++) {
+            $data_perkiraan[$j] =  $small_a + $small_b * ($hari_ke[$jml_data - 1] + $j + 1);
+            $j++;
+        }
+
 
         $data['sgm_x'] = $sgm_x;
         $data['sgm_y'] = $sgm_y;
@@ -162,6 +171,7 @@ class Admin extends CI_Controller
         $data['forcast'] = $data_forcast;
         $data['data_real'] = $jml_pstf;
         $data['hari'] = $hari_ke;
+        $data['prediksi_kedepan'] = $data_perkiraan;
 
         //untuk input model X Y a dan b
         // $data_model = array(
@@ -289,6 +299,46 @@ class Admin extends CI_Controller
         $this->load->view('templet_admin/header.php');
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_lihat_MAD.php', $data);
+        $this->load->view('templet_admin/footer.php');
+    }
+
+    public function lihat_prediksi()
+    {
+        if ($this->input->post('jml_hari', TRUE) == NULL) {
+            $data_ambil = 5;
+        } else {
+            $data_ambil = $this->input->post('jml_hari', TRUE);
+        }
+
+        $data_real = $this->m_corona->ambil_data_mentah('data_corona')->result();
+        $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+
+        $i = 0;
+        foreach ($data_real as $dr) {
+            $data_pstf[$i] = $dr->jml_pstf;
+            $data_hari[$i++] = $dr->hari_ke; //x
+        }
+        foreach ($data_variabel as $dv) {
+            $a = $dv->small_a;
+            $b = $dv->small_b;
+            $jml_data = $dv->jml_data;
+        }
+
+        $j = 0;
+        for ($i = $jml_data; $i < $jml_data + $data_ambil; $i++) {
+            $data_perkiraan[$j] =  $a + $b * ($data_hari[$jml_data - 1] + $j + 1);
+            $j++;
+        }
+
+
+
+        $data['data_real'] = $data_pstf;
+        $data['hari'] = $data_hari;
+        $data['prediksi_kedepan'] = $data_perkiraan;
+
+        $this->load->view('templet_admin/header.php');
+        $this->load->view('templet_admin/sidebar.php');
+        $this->load->view('admin/v_lihat_prediksi.php', $data);
         $this->load->view('templet_admin/footer.php');
     }
 

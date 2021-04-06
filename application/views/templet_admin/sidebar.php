@@ -57,6 +57,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Data Prediksi COVID-19 (ID):</h6>
                         <a class="collapse-item" href="<?php echo base_url('admin/lihat_hitung') ?>">Prediksi Regresi Linier</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_prediksi') ?>">Prediksi Kedepan</a>
                         <a class="collapse-item" href="<?php echo base_url('admin/lihat_variabel') ?>"> Variabel Regresi Linier</a>
                     </div>
                 </div>
