@@ -50,4 +50,12 @@
 
             </body>
 
+
+
+            <script>
+                $(document).ready(function() {
+                    $('#Data').DataTable();
+                });
+            </script>
+
             </html>

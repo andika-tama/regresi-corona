@@ -73,7 +73,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Akurasi Regresi Linier:</h6>
                         <a class="collapse-item" href="<?php echo base_url('admin/lihat_selisih') ?>">Selisih</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_MAD') ?>"> Akurasi MAD</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lihat_MAD') ?>"> Galat MAD</a>
                     </div>
                 </div>
             </li>

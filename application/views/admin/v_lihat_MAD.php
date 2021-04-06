@@ -33,17 +33,17 @@ foreach ($xifi as $xf) {
             <h1 class="h3 mb-4 text-gray-800 mt-3">Perhitungan MAD</h1>
             <hr class="sidebar-divider">
 
-            <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Akurasi / <b>Akurasi MAD</b></div>
+            <div class="alert alert-secondary mt-2 mb-2"> <i class="fa fa-folder"></i> Akurasi / <b>Galat MAD</b></div>
 
             <hr class="sidebar-divider">
 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary text-center">Akurasi Prediksi Regresi Linier</h6>
+                    <h6 class="m-0 font-weight-bold text-primary text-center">Galat Prediksi Regresi Linier</h6>
                 </div>
                 <div class="card-body">
                     <div class="text-center">
-                        <h6>Berdasarkan perhitungan MAD, akurasi prediksi Regresi Linier adalah sebesar :</h6>
+                        <h6>Berdasarkan perhitungan MAD, galat prediksi Regresi Linier adalah sebesar :</h6>
                     </div>
                     <br>
                     <div class="text-center">
@@ -58,7 +58,7 @@ foreach ($xifi as $xf) {
                     <h6 class="m-0 font-weight-bold text-primary text-center">Perhitungan MAD</h6>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
+                    <table id="Data" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Hari Ke-</th>

@@ -46,7 +46,7 @@ foreach ($selisih as $sl) {
                     <h6 class="m-0 font-weight-bold text-primary text-center">Selisih Data Real Dengan Prediksi</h6>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
+                    <table id="Data" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th>Hari Ke-</th>

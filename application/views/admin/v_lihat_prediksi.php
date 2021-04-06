@@ -13,8 +13,8 @@ foreach ($prediksi_kedepan as $pk) {
     $jml_hari++;
 }
 
-if ($this->input->post('jml_hari') != NULL) {
-    $isi = $this->input->post('jml_hari');
+if (($this->input->post('jml_hari', TRUE) != NULL) && ($this->input->post('jml_hari', TRUE) != 0)) {
+    $isi = abs($this->input->post('jml_hari'));
 } else {
     $isi = '';
 }
@@ -64,9 +64,10 @@ if ($this->input->post('jml_hari') != NULL) {
                     <h6 class="m-0 font-weight-bold text-primary text-center">Prediksi Jumlah Positif Untuk <?php echo $jml_hari ?> Hari Kedepan</h6>
                 </div>
                 <div class="card-body">
-                    <table class="table table-striped table-bordered">
+                    <table id="Data" class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th width="220px">Jarak Hari Ke Depan</th>
                                 <th>Hari Ke-</th>
                                 <th>Jumlah Positif (Prediksi)</th>
                             </tr>
@@ -74,6 +75,7 @@ if ($this->input->post('jml_hari') != NULL) {
                         <tbody>
                             <?php for ($i = 0; $i < $jml_hari; $i++) : ?>
                                 <tr>
+                                    <td><?php echo $i + 1; ?></td>
                                     <td><?php echo $hari_pandemi[$jml_data - 1] + $i + 1; ?></td>
                                     <td><?php echo $ramalan[$i]; ?></td>
                                 </tr>

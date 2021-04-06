@@ -304,10 +304,10 @@ class Admin extends CI_Controller
 
     public function lihat_prediksi()
     {
-        if ($this->input->post('jml_hari', TRUE) == NULL) {
+        if (($this->input->post('jml_hari', TRUE) == NULL) || ($this->input->post('jml_hari', TRUE) == 0)) {
             $data_ambil = 5;
         } else {
-            $data_ambil = $this->input->post('jml_hari', TRUE);
+            $data_ambil = abs($this->input->post('jml_hari', TRUE));
         }
 
         $data_real = $this->m_corona->ambil_data_mentah('data_corona')->result();
