@@ -8,14 +8,16 @@ class Auth extends CI_Controller
     public function index()
     {
         $this->_is_logged();
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Login";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('auth/v_login');
     }
 
     public function login()
     {
         $this->_is_logged();
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Login";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('auth/v_login');
     }
 
@@ -25,7 +27,8 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'password', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('templet_admin/header.php');
+            $data['judul'] = "Login";
+            $this->load->view('templet_admin/header.php', $data);
             $this->load->view('auth/v_login');
         } else {
 

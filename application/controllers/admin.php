@@ -6,25 +6,53 @@ class Admin extends CI_Controller
         parent::__construct();
         $this->_is_logged();
     }
+
     public function index()
     {
-        $this->load->view('templet_admin/header.php');
-        $this->load->view('templet_admin/sidebar.php');
-        $this->load->view('admin/dashboard.php');
-        $this->load->view('templet_admin/footer.php');
+        redirect('admin/dashboard');
     }
+
     public function dashboard()
     {
-        $this->load->view('templet_admin/header.php');
+
+        $MAD = $this->_hitung_MAD();
+
+        $data['MAD'] = $MAD;
+
+        $data_mentah = $this->m_corona->ambil_data_mentah('data_corona')->result();
+        $jml_data = 0;
+        //hitung sigma dari x, y, xy, x2
+        foreach ($data_mentah as $dm) {
+            $jml_data++;
+        }
+
+        $regresi = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+
+        foreach ($regresi as $reg) {
+            $X = $reg->big_x;
+            $Y = $reg->big_y;
+            $a = $reg->small_a;
+            $b = $reg->small_b;
+        }
+
+        $data['big_X'] = $X;
+        $data['big_Y'] = $Y;
+        $data['small_b'] = $b;
+        $data['small_a'] = $a;
+        $data['corona'] = $this->m_corona->ambil_data_real('data_corona')->result();
+        $data['jml_data'] = $jml_data;
+        $data['judul'] = "Dashboard";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
-        $this->load->view('admin/dashboard.php');
+        $this->load->view('admin/dashboard.php', $data);
         $this->load->view('templet_admin/footer.php');
     }
 
     public function data_real()
     {
         $data['corona'] = $this->m_corona->ambil_data_real('data_corona')->result();
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Data Positif";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_data_real.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -32,7 +60,8 @@ class Admin extends CI_Controller
     public function input_data_corona()
     {
         $data['corona'] = $this->m_corona->ambil_data('data_corona')->result();
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Input Data Positif";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_input_data_real.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -42,7 +71,8 @@ class Admin extends CI_Controller
     public function lihat_variabel()
     {
         $data['regresi'] = $this->m_corona->ambil_data_variabel('model_regresi')->result();
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Variabel Regresi Linier";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_data_variabel.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -184,7 +214,8 @@ class Admin extends CI_Controller
         //$this->m_corona->input_data_model($data_model);
 
         //$this->load->view('admin/v_hitung_data', $data);
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Regresi Linier";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/cek_regresi.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -260,7 +291,8 @@ class Admin extends CI_Controller
         $data['pembulatan'] = $pembulatan;
         $data['selisih'] = $selisih;
 
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Selisih Prediksi";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_lihat_selisih.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -296,7 +328,8 @@ class Admin extends CI_Controller
         $data['sgm_xifi'] = $sgm_xifi;
         $data['MAD'] = $MAD;
 
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Perhitungan Galat MAD";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_lihat_MAD.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -336,7 +369,8 @@ class Admin extends CI_Controller
         $data['hari'] = $data_hari;
         $data['prediksi_kedepan'] = $data_perkiraan;
 
-        $this->load->view('templet_admin/header.php');
+        $data['judul'] = "Prediksi Corona";
+        $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/v_lihat_prediksi.php', $data);
         $this->load->view('templet_admin/footer.php');
@@ -347,5 +381,30 @@ class Admin extends CI_Controller
         if (!$this->session->userdata('username')) {
             redirect('auth/login');
         }
+    }
+
+    private function _hitung_MAD()
+    {
+        $i = 0;
+        $sgm_xifi = 0;
+        $data_real = $this->m_corona->ambil_data_real('data_corona')->result();
+        $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+
+        foreach ($data_real as $dr) {
+            $data_pstf[$i] = $dr->jml_pstf;
+            $data_hari[$i++] = $dr->hari_ke; //x
+        }
+        foreach ($data_variabel as $dv) {
+            $a = $dv->small_a;
+            $b = $dv->small_b;
+            $jml_data = $dv->jml_data;
+        }
+        for ($k = 0; $k < $jml_data; $k++) {
+            $data_forcast[$k] =  $a + $b * $data_hari[$k];
+
+            $xifi[$k] = abs($data_pstf[$k] - $data_forcast[$k]);
+            $sgm_xifi += $xifi[$k];
+        }
+        return $MAD = $sgm_xifi / $jml_data;
     }
 }
