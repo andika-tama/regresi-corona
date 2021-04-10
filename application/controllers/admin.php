@@ -16,32 +16,19 @@ class Admin extends CI_Controller
     {
 
         $MAD = $this->_hitung_MAD();
+        $data_real = $this->_ambil_data_real();
+        $data_variabel = $this->_ambil_variabel();
 
-        $data['MAD'] = $MAD;
-
-        $data_mentah = $this->m_corona->ambil_data_mentah('data_corona')->result();
-        $jml_data = 0;
-        //hitung sigma dari x, y, xy, x2
-        foreach ($data_mentah as $dm) {
-            $jml_data++;
-        }
-
-        $regresi = $this->m_corona->ambil_data_variabel('model_regresi')->result();
-
-        foreach ($regresi as $reg) {
-            $X = $reg->big_x;
-            $Y = $reg->big_y;
-            $a = $reg->small_a;
-            $b = $reg->small_b;
-        }
-
-        $data['big_X'] = $X;
-        $data['big_Y'] = $Y;
-        $data['small_b'] = $b;
-        $data['small_a'] = $a;
-        $data['corona'] = $this->m_corona->ambil_data_real('data_corona')->result();
-        $data['jml_data'] = $jml_data;
+        $data['MAD'] = $MAD['MAD'];
+        $data['big_X'] = $data_variabel['X'];
+        $data['big_Y'] = $data_variabel['Y'];;
+        $data['small_b'] = $data_variabel['b'];;
+        $data['small_a'] = $data_variabel['a'];;
+        $data['data_pstf'] = $data_real['data_pstf'];
+        $data['data_hari'] = $data_real['data_hari'];
+        $data['jml_data'] = $data_real['jml_data'];
         $data['judul'] = "Dashboard";
+
         $this->load->view('templet_admin/header.php', $data);
         $this->load->view('templet_admin/sidebar.php');
         $this->load->view('admin/dashboard.php', $data);
@@ -300,8 +287,8 @@ class Admin extends CI_Controller
 
     public function lihat_MAD()
     {
+        $MAD = $this->_hitung_MAD();
         $i = 0;
-        $sgm_xifi = 0;
         $data_real = $this->m_corona->ambil_data_real('data_corona')->result();
         $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
 
@@ -316,17 +303,14 @@ class Admin extends CI_Controller
         }
         for ($k = 0; $k < $jml_data; $k++) {
             $data_forcast[$k] =  $a + $b * $data_hari[$k];
-
             $xifi[$k] = abs($data_pstf[$k] - $data_forcast[$k]);
-            $sgm_xifi += $xifi[$k];
         }
-        $MAD = $sgm_xifi / $jml_data;
 
         $data['real'] = $data_real;
         $data['forcast'] = $data_forcast;
         $data['xifi'] = $xifi;
-        $data['sgm_xifi'] = $sgm_xifi;
-        $data['MAD'] = $MAD;
+        $data['sgm_xifi'] = $MAD['sgm_xifi'];
+        $data['MAD'] = $MAD['MAD'];
 
         $data['judul'] = "Perhitungan Galat MAD";
         $this->load->view('templet_admin/header.php', $data);
@@ -343,27 +327,20 @@ class Admin extends CI_Controller
             $data_ambil = abs($this->input->post('jml_hari', TRUE));
         }
 
-        $data_real = $this->m_corona->ambil_data_mentah('data_corona')->result();
-        $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+        $data_real = $this->_ambil_data_real();
+        $data_pstf = $data_real['data_pstf'];
+        $data_hari = $data_real['data_hari'];
 
-        $i = 0;
-        foreach ($data_real as $dr) {
-            $data_pstf[$i] = $dr->jml_pstf;
-            $data_hari[$i++] = $dr->hari_ke; //x
-        }
-        foreach ($data_variabel as $dv) {
-            $a = $dv->small_a;
-            $b = $dv->small_b;
-            $jml_data = $dv->jml_data;
-        }
+        $data_variabel = $this->_ambil_variabel();
+        $a = $data_variabel['a'];
+        $b = $data_variabel['b'];
+        $jml_data = $data_variabel['jml_data'];
 
         $j = 0;
         for ($i = $jml_data; $i < $jml_data + $data_ambil; $i++) {
             $data_perkiraan[$j] =  $a + $b * ($data_hari[$jml_data - 1] + $j + 1);
             $j++;
         }
-
-
 
         $data['data_real'] = $data_pstf;
         $data['hari'] = $data_hari;
@@ -385,26 +362,66 @@ class Admin extends CI_Controller
 
     private function _hitung_MAD()
     {
-        $i = 0;
-        $sgm_xifi = 0;
-        $data_real = $this->m_corona->ambil_data_real('data_corona')->result();
-        $data_variabel = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+        $data_real = $this->_ambil_data_real();
+        $data_pstf = $data_real['data_pstf'];
+        $data_hari = $data_real['data_hari'];
 
-        foreach ($data_real as $dr) {
-            $data_pstf[$i] = $dr->jml_pstf;
-            $data_hari[$i++] = $dr->hari_ke; //x
-        }
-        foreach ($data_variabel as $dv) {
-            $a = $dv->small_a;
-            $b = $dv->small_b;
-            $jml_data = $dv->jml_data;
-        }
+        $data_variabel = $this->_ambil_variabel();
+        $a = $data_variabel['a'];
+        $b = $data_variabel['b'];
+        $jml_data = $data_variabel['jml_data'];
+
+        $sgm_xifi = 0;
         for ($k = 0; $k < $jml_data; $k++) {
             $data_forcast[$k] =  $a + $b * $data_hari[$k];
-
             $xifi[$k] = abs($data_pstf[$k] - $data_forcast[$k]);
             $sgm_xifi += $xifi[$k];
         }
-        return $MAD = $sgm_xifi / $jml_data;
+
+        $MAD['sgm_xifi'] = $sgm_xifi;
+        $MAD['MAD'] = $sgm_xifi / $jml_data;
+
+        return $MAD;
+    }
+
+    //coba fungsi hitung regresi
+    private function _hitung_regresi()
+    {
+    }
+
+    //ambil nilai variabel
+    private function _ambil_variabel()
+    {
+        $data_variabel_model = $this->m_corona->ambil_data_variabel('model_regresi')->result();
+        foreach ($data_variabel_model as $dv) {
+            $a = $dv->small_a;
+            $b = $dv->small_b;
+            $X = $dv->big_x;
+            $Y = $dv->big_y;
+            $jml_data = $dv->jml_data;
+        }
+        $data_variabel['a'] = $a;
+        $data_variabel['b'] = $b;
+        $data_variabel['X'] = $X;
+        $data_variabel['Y'] = $Y;
+        $data_variabel['jml_data'] = $jml_data;
+
+        return $data_variabel;
+    }
+
+    //ambil data positif
+    private function _ambil_data_real()
+    {
+        $data_real_model = $this->m_corona->ambil_data_real('data_corona')->result();
+        $i = 0;
+        foreach ($data_real_model as $dr) {
+            $data_pstf[$i] = $dr->jml_pstf;
+            $data_hari[$i++] = $dr->hari_ke; //x
+        }
+        $data_real['data_pstf'] = $data_pstf;
+        $data_real['data_hari'] = $data_hari;
+        $data_real['jml_data'] = $i;
+
+        return $data_real;
     }
 }
