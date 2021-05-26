@@ -1,0 +1,48 @@
+.konten-info {
+	display: flex;
+	margin: 10px auto;
+	justify-content: center;
+	padding: 10px;
+	flex-wrap: wrap;
+	align-content: center;
+}
+
+.konten-info .baris {
+	display: flex;
+	flex-direction: column;
+	height: 150px;
+	margin-bottom: 5px;
+}
+
+.isi-konten {
+	width: 250px;
+}
+
+.konten-info .baris .isi-konten {
+	padding: 5px;
+}
+
+
+.konten-info .baris .isi-konten .card {
+	border-radius: 10px;
+	height: 100px;
+}
+
+.konten-info .baris .isi-konten .card .card-body {
+	border-radius: 10px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.konten-info .baris .isi-konten button {
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.konten-info .baris .isi-konten .kartu-var {
+	height: 70px;
+}

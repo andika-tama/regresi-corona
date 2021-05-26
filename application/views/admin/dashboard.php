@@ -13,68 +13,53 @@
             <canvas id="myChart"></canvas>
             <hr>
 
-            <div class="row">
-                <div class="col-3">
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body bg-success text-white">Jumlah Positif : <?php echo $jml_data; ?></div>
-                            </div>
+            <div class="konten-info">
+                <div class="baris">
+                    <div class="isi-konten">
+                        <div class="card">
+                            <div class="card-body bg-success text-white">Jumlah Positif : <?php echo $jml_data; ?></div>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="card">
-                                <button class="btn btn-info btn-block"><i class="fa fa-search mr-3"></i>Lihat Jumlah Positif</button>
-                            </div>
+                    <div class="isi-konten tombol">
+                        <button class="btn btn-info btn-block"><i class="fa fa-search mr-3"></i>Lihat Jumlah Positif</button>
+                    </div>
+                </div>
+                <!-- Konten 2 -->
+                <div class="baris">
+                    <div class="isi-konten">
+                        <div class="card">
+                            <div class="card-body bg-danger text-white">Galat MAD : <?php echo $MAD; ?>%</div>
+                        </div>
+                    </div>
+                    <div class="isi-konten tombol">
+                        <button class="btn btn-warning btn-block"><i class="fas fa-percentage mr-3"></i> Lihat Perhitungan Galat</button>
+                    </div>
+                </div>
+
+                <!-- konten 3 -->
+
+                <div class="baris">
+                    <div class="isi-konten kartu">
+                        <div class="card kartu-var">
+                            <div class="card-body bg-white">Variabel Y : <?php echo $big_Y; ?></div>
+                        </div>
+                    </div>
+                    <div class="isi-konten kartu">
+                        <div class="card kartu-var">
+                            <div class="card-body bg-primary text-white">Variabel X : <?php echo $big_X; ?></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-3">
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body bg-danger text-white">Galat MAD : <?php echo $MAD; ?>%</div>
-                            </div>
+                <!-- konten 4 -->
+                <div class="baris">
+                    <div class="isi-konten kartu">
+                        <div class="card kartu-var">
+                            <div class="card-body bg-primary text-white">Variabel b: <?php echo $small_b; ?></div>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="card">
-                                <button class="btn btn-warning btn-block"><i class="fas fa-percentage mr-3"></i> Lihat Perhitungan Galat</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body bg-primary text-white">Variabel X : <?php echo $big_X; ?></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body bg-white">Variabel Y : <?php echo $big_Y; ?></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row mb-2">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body bg-white">Variabel a : <?php echo $small_a; ?></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body bg-primary text-white">Variabel b: <?php echo $small_b; ?></div>
-                            </div>
+                    <div class="isi-konten kartu">
+                        <div class="card kartu-var">
+                            <div class="card-body bg-white">Variabel a : <?php echo $small_a; ?></div>
                         </div>
                     </div>
                 </div>
