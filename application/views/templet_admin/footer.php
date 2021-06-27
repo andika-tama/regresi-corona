@@ -38,10 +38,10 @@
                 </div>
             </div>
 
+            <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
             <script src="<?php echo base_url() ?>assets/script.js"></script>
 
             <!-- Bootstrap core JavaScript-->
-            <script src="<?php echo base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
             <script src="<?php echo base_url() ?>assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
             <!-- Core plugin JavaScript-->

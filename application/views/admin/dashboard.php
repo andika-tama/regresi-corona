@@ -1,3 +1,15 @@
+<?php
+
+//corona live
+
+$url = file_get_contents('https://api.kawalcorona.com/indonesia');
+$data = json_decode($url, true);
+
+$positif = $data[0]["positif"];
+$sembuh = $data[0]["sembuh"];
+$meninggal = $data[0]["meninggal"];
+?>
+
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -10,6 +22,34 @@
             <!-- Page Heading -->
             <h1 class="h3 mb-4 mt-4 text-gray-800">Dashboard</h1>
             <hr>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="card text-white bg-info mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Jumlah Positif</h5>
+                            <p class="card-text covid-total"><strong><?php echo $positif ?></strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card text-white bg-success mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Pasien Sembuh</h5>
+                            <p class="card-text covid-sembuh"><strong><?php echo $sembuh ?></strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card text-white bg-danger mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Pasien Meninggal</h5>
+                            <p class="card-text covid-meninggal"><strong><?php echo $meninggal ?></strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
             <canvas id="myChart"></canvas>
             <hr>
 
@@ -17,7 +57,7 @@
                 <div class="baris">
                     <div class="isi-konten">
                         <div class="card">
-                            <div class="card-body bg-success text-white">Jumlah Positif : <?php echo $jml_data; ?></div>
+                            <div class="card-body bg-success text-white">Total Hari Perhitungan : <?php echo $jml_data; ?></div>
                         </div>
                     </div>
                     <div class="isi-konten tombol">
