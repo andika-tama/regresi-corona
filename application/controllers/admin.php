@@ -4,7 +4,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->_is_logged();
+        // $this->_is_logged();
     }
 
     public function index()
@@ -46,6 +46,7 @@ class Admin extends CI_Controller
     }
     public function input_data_corona()
     {
+        $this->_is_logged();
         $data['corona'] = $this->m_corona->ambil_data('data_corona')->result();
         $data['judul'] = "Input Data Positif";
         $this->load->view('templet_admin/header.php', $data);
@@ -210,6 +211,7 @@ class Admin extends CI_Controller
 
     public function input_data()
     {
+        $this->_is_logged();
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {

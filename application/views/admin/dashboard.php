@@ -24,7 +24,7 @@ $meninggal = $data[0]["meninggal"];
             <hr>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card text-white bg-info mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Jumlah Positif</h5>
@@ -32,7 +32,7 @@ $meninggal = $data[0]["meninggal"];
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card text-white bg-success mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Pasien Sembuh</h5>
@@ -40,7 +40,7 @@ $meninggal = $data[0]["meninggal"];
                         </div>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card text-white bg-danger mb-3">
                         <div class="card-body">
                             <h5 class="card-title">Pasien Meninggal</h5>
